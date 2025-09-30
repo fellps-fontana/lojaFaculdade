@@ -1,1 +1,46 @@
-<p>produto-component works!</p>
+<h2 class="mb-3">Produtos</h2>
+@if (loading) {<div class="alert alert-info">Carregando</div>}
+@if (erro) {<div class="alert alert-danger">{{erro}}</div>}
+@if (boa) {<div class="alert alert-success">{{boa}}</div>}
+
+<div class="row g-2 align-items-center mb-3">
+    <div class="col-sm-6 col-md-4">
+        <input class="form-control"
+                [(ngModel)]="novoNome"
+                placeholder="Nome do produto"
+        >
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <input class="form-control"
+        [(ngModel)]="novaDescricao"
+        placeholder="descricao do produto"
+        >
+
+    </div>
+    
+    <div class="col-sm-6 col-md-4">
+        <input class="form-control"
+        [(ngModel)]="novoPreco"
+        placeholder="Preco do produto"
+        >
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" (click)="adicionar()">Adicionar</button>
+        
+    </div>
+    <ul class="list-group mb-3">
+        @for (p of produtos; track p.id)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{p.nome}} - {{'R$'+ p.preco.toFixed(2)}} - {{p.descricao}}</span>
+                <div class="col-auto ">
+                <button class="btn btn-sm btn-outline-warning" (click)="remover(p.id)">Editar</button>
+                <!-- <button class="btn btn-sm btn-outline-warning" (click)="editar(p.id,'testes')">Editar</button> -->
+                </div>
+            </li>
+        }
+    </ul>
+    @if (produtos.length === 0){
+        <div class="alert alert-info">Nenhum produto cadastrado</div>
+    }
+</div>

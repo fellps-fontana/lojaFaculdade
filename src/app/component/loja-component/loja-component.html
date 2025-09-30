@@ -1,0 +1,82 @@
+<h2 class="mb-3">Lojas</h2>
+<div class="row g-2 align-items-center mb-3">
+    <div class="col-sm-6 col-md-4">
+        <input class="form-control"
+                [(ngModel)]="novoNome"
+                placeholder="Nome da loja"
+        >
+        <input class="form-control"
+        [(ngModel)]="novoEndereco"
+        placeholder="Endereço da loja"
+        >
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <input class="form-control"
+        [(ngModel)]="novoCnpj"
+        placeholder="Cnpj da loja"
+        >
+        <input class="form-control"
+        [(ngModel)]="novoTelefone"
+        placeholder="Telefone da loja"
+        >
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" (click)="adicionar()">Adicionar</button>
+        
+    </div>
+    <ul class="list-group mb-3">
+        @for (l of lojas; track l.id)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{l.id}} - {{l.nome}} - {{l.endereco}} - {{l.cnpj}} - {{l.telefone}} </span>
+                <div class="col-auto ">
+                <button class="btn btn-sm btn-outline-warning" (click)="editar(l.id)"data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editar(l.id)">Editar</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="remover(l.id)">Remover</button>
+                </div>
+            </li>
+        }
+    </ul>
+    @if (lojas.length === 0){
+        <div class="alert alert-info">Nenhuma loja cadastrad</div>
+    }
+
+</div>
+
+
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Título do Modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+            <div class="col-sm-6 col-md-4">
+                <input id="nome" class="form-control"
+                        [(ngModel)]="novoNome"
+                        placeholder="Nome da loja"
+                >
+                <input id="endereco" class="form-control"
+                [(ngModel)]="novoEndereco"
+                placeholder="Endereço da loja"
+                >
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <input  id="cnpj" class="form-control"
+                [(ngModel)]="novoCnpj"
+                placeholder="Cnpj da loja"
+                >
+                <input id="telefone" class="form-control"
+                [(ngModel)]="novoTelefone"
+                placeholder="Telefone da loja"
+                >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
